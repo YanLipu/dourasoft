@@ -19,3 +19,7 @@ quasar dev
 ## Caso não inicie automaticamente
  
  ``http://localhost:8080/#``
+ 
+## Coloquei a aplicação no Netlify
+
+``https://condescending-panini-cff9e8.netlify.app/#/``
