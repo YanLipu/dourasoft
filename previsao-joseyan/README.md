@@ -1,22 +1,25 @@
-# Quasar App (previsao-joseyan)
+# Aplicação de Previsão do Tempo
 
-A Quasar Framework app
+Desenvolvi essa aplicação usando o framework Quasar. O primeiro passo foi criar uma interface onde as informações de 
+previsão do tempo iam ser mostradas. Em seguida precisei aprender como lidar com API's e como tratar os dados recebidos;
+A API utilizada foi da OpenWeather(https://openweathermap.org/forecast5). A API retorna as informações de previsão do tempo
+divididas de 3 em 3 horas, ou seja, retorna um array de tamanho 40. Então separei o array em 5, para mostrar a previsão do dia 
+atual e dos proximos 4 dias.
 
-## Install the dependencies
-```bash
-npm install
+## Instale as dependencias
+```
+npm install -g @quasar/cli
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
+### Iniciar a aplicação em modo dev
+```
 quasar dev
 ```
 
+## Caso não inicie automaticamente
+ 
+ ``http://localhost:8080/#``
+ 
+## Coloquei a aplicação no Netlify
 
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+``https://condescending-panini-cff9e8.netlify.app/#/``
