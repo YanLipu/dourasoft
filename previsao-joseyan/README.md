@@ -22,4 +22,4 @@ quasar dev
  
 ## Coloquei a aplicação no Netlify
 
-``https://condescending-panini-cff9e8.netlify.app/#/``
+``https://wizardly-colden-d3aa2f.netlify.app/#/``
