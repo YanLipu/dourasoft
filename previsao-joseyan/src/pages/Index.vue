@@ -34,11 +34,20 @@
     </template>
 
     <template v-if="weatherData">
-    <div class="q-pa-md">
+
+      <div class="col text-white text-center flex-column">
+        <img :src="'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/' + this.weatherData.list[0].weather[0].icon + '.png'">
+      </div>
+
+    </template>
+
+    <template v-if="weatherData">
+    <div class="q-pa-md col doc-example__content">
       <q-markup-table dark class="bg-indigo-8">
         <thead>
           <tr>
             <th class="text-left">Day</th>
+            <th class="text-right">Weather</th>
             <th class="text-right">Temperature</th>
             <th class="text-right">Min</th>
             <th class="text-right">Max</th>
@@ -48,7 +57,8 @@
         </thead>
         <tbody>
           <tr>
-            <td class="text-left">{{ weatherData.list[3].dt_txt}}</td>
+            <td class="text-left">{{ convertDate(3) }}</td>
+            <td class="text-right"><img :src="'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/' + this.weatherData.list[3].weather[0].icon + '.png'" alt="" style="width:50px; height:auto;"></td>
             <td class="text-right">{{ Math.round(weatherData.list[3].main.temp) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[3].main.temp_min) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[8].main.temp_max) }}&deg </td>
@@ -56,7 +66,8 @@
             <td class="text-right">{{ Math.round(weatherData.list[3].main.feels_like) }}&deg</td>
           </tr>
           <tr>
-            <td class="text-left">{{ weatherData.list[11].dt_txt}}</td>
+            <td class="text-left">{{ convertDate(11) }}</td>
+            <td class="text-right"><img :src="'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/' + this.weatherData.list[11].weather[0].icon + '.png'" alt="" style="width:50px; height:auto;"></td>
             <td class="text-right">{{ Math.round(weatherData.list[11].main.temp) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[11].main.temp_min) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[15].main.temp_max) }}&deg</td>
@@ -64,7 +75,8 @@
             <td class="text-right">{{ Math.round(weatherData.list[11].main.feels_like) }}&deg</td>
           </tr>
           <tr>
-            <td class="text-left">{{ weatherData.list[19].dt_txt}}</td>
+            <td class="text-left">{{ convertDate(19) }}</td>
+            <td class="text-right"><img :src="'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/' + this.weatherData.list[19].weather[0].icon + '.png'" alt="" style="width:50px; height:auto;"></td>
             <td class="text-right">{{ Math.round(weatherData.list[19].main.temp) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[19].main.temp_min) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[23].main.temp_max) }}&deg</td>
@@ -72,7 +84,8 @@
             <td class="text-right">{{ Math.round(weatherData.list[19].main.feels_like) }}&deg</td>
           </tr>
           <tr>
-            <td class="text-left">{{ weatherData.list[27].dt_txt}}</td>
+            <td class="text-left">{{ convertDate(27)}}</td>
+            <td class="text-right"><img :src="'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/' + this.weatherData.list[27].weather[0].icon + '.png'" alt="" style="width:50px; height:auto;"></td>
             <td class="text-right">{{ Math.round(weatherData.list[27].main.temp) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[27].main.temp_min) }}&deg</td>
             <td class="text-right">{{ Math.round(weatherData.list[31].main.temp_max) }}&deg</td>
@@ -96,20 +109,13 @@ export default {
       weatherData: null,
       apiUrl: 'https://api.openweathermap.org/data/2.5/weather',
       forecastUrl: 'https://api.openweathermap.org/data/2.5/forecast',
-      apiKey: '2306d7872a24a0aed6b44d90e6dae953'
+      apiKey: '2306d7872a24a0aed6b44d90e6dae953',
+      iconUrl: 'https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/'
     }
   },
   methods: {
     getLocation() {
       console.log('getLocation')
-    },
-    getWeatherBySearch() {
-      console.log('getWeatherBySearch')
-      this.$axios(`${ this.apiUrl }?q=${ this.search }&appid=${ this.
-      apiKey }&units=metric`).then(response => {
-        console.log('response: ', response)
-        this.weatherData = response.data
-      })
     },
     getWeatherForecast() {
       console.log('getWeatherForecast')
@@ -119,6 +125,15 @@ export default {
         this.weatherData = response.data
       })
       console.log('Terminou a funcao')
+    },
+    getImgUrl() {      
+      return iconUrl + this.weatherData.list[0].weather[0].icon + '.png'
+    },
+    convertDate(x) {
+        var data = this.weatherData.list[x].dt_txt
+        var parte = data.substring(0,10).split('-').reverse().join('/')
+        console.log(parte)
+        return parte
     }    
   }
 }
@@ -127,4 +142,12 @@ export default {
 <style lang="sass">
   .q-page
     background: linear-gradient(to top, #4568dc, #b06ab3)
+  
+  .q-table__container
+    position: relative
+    overflow: auto
+
+  
+    
+
 </style>
